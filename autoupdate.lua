@@ -44,8 +44,11 @@ function main()
             downloadUrlToFile(script_url, script_path, function(id, status)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
                     sampAddChatMessage("Скрипт успешно обновлен!", 0x8B00FF)
-                    sampAddChatMessage("Перезагружаю скрипт...", 0x8B00FF)
-                    thisScript():reload()  -- Перезагрузка текущего скрипта
+                    sampAddChatMessage("Перезапускаю MoonLoader...", 0x8B00FF)
+                    wait(2000)  -- Подождем 2 секунды перед перезапуском MoonLoader
+                    os.execute("start /b moonloader.exe")  -- Запускаем MoonLoader в фоновом режиме
+                    wait(1000)
+                    thisScript():unload()  -- Выгружаем текущий скрипт
                 end
             end)
             break
